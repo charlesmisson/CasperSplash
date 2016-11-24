@@ -17,6 +17,7 @@ class CasperSplashTests: XCTestCase {
     var testUserDefaults: UserDefaults!
     var testPrefs: Preferences!
     var casperSplashController: CasperSplashController!
+    var casperSplashMainController: CasperSplashMainViewController!
     var softwareArray = [Software]()
     //var testPrefs = Preferences!(nil)
     
@@ -415,32 +416,32 @@ class CasperSplashTests: XCTestCase {
     
     func testCanContinue_yes() {
         
-        casperSplashController = CasperSplashController()
+        casperSplashMainController = CasperSplashMainViewController()
         let input: [Software] = [
             Software(name: "test1", version: nil, status: .success, iconPath: nil, displayName: nil, description: nil, canContinue: false, displayToUser: true),
             Software(name: "test2", version: nil, status: .success, iconPath: nil, displayName: nil, description: nil, canContinue: false, displayToUser: true)
         ]
-        XCTAssertTrue(casperSplashController.canContinue(input))
+        XCTAssertTrue(casperSplashMainController.canContinue(input))
     }
     
     func testCanContinue_yesNoCritical() {
         
-        casperSplashController = CasperSplashController()
+        casperSplashMainController = CasperSplashMainViewController()
         let input: [Software] = [
             Software(name: "test1", version: nil, status: .failed, iconPath: nil, displayName: nil, description: nil, canContinue: true, displayToUser: true),
             Software(name: "test2", version: nil, status: .failed, iconPath: nil, displayName: nil, description: nil, canContinue: true, displayToUser: true)
         ]
-        XCTAssertTrue(casperSplashController.canContinue(input))
+        XCTAssertTrue(casperSplashMainController.canContinue(input))
     }
 
     func testCanContinue_no() {
         
-        casperSplashController = CasperSplashController()
+        casperSplashMainController = CasperSplashMainViewController()
         let input = [
             Software(name: "test1", version: nil, status: .pending, iconPath: nil, displayName: nil, description: nil, canContinue: false, displayToUser: true),
             Software(name: "test2", version: nil, status: .success, iconPath: nil, displayName: nil, description: nil, canContinue: false, displayToUser: true)
         ]
-        XCTAssertFalse(casperSplashController.canContinue(input))
+        XCTAssertFalse(casperSplashMainController.canContinue(input))
     }
     
     

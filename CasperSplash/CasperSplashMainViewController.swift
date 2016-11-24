@@ -20,7 +20,8 @@ class CasperSplashMainViewController: NSViewController, NSTableViewDataSource {
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var installingLabel: NSTextField!
 //    
-//    @IBOutlet var backgroundWindow: NSWindow!
+    @IBOutlet var mainView: NSView!
+    @IBOutlet weak var statusView: NSView!
     
     var mainWindowController: CasperSplashController!
 
@@ -31,6 +32,13 @@ class CasperSplashMainViewController: NSViewController, NSTableViewDataSource {
         super.viewDidAppear()
         // Do view setup here.
     
+        self.mainView.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        self.mainView.layer?.cornerRadius = 10
+        self.mainView.layer?.shadowOpacity = 0.5
+        self.mainView.layer?.shadowRadius = 2
+        self.mainView.layer?.borderWidth = 0.2
+        
+        
         mainWindowController = (self.view.window?.windowController)! as! CasperSplashController
         checkSoftwareStatus()
         
@@ -69,6 +77,10 @@ class CasperSplashMainViewController: NSViewController, NSTableViewDataSource {
 
 func SetupInstalling() {
     indeterminateProgressIndicator.startAnimation(self)
+    indeterminateProgressIndicator.isHidden = false
+    
+    installingLabel.stringValue = "Installing…"
+    
     statusLabel.stringValue = ""
     continueButton?.isEnabled = false
 }
